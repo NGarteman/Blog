@@ -1,0 +1,51 @@
+<div class="container" style="margin-top:20px">
+    <div class="col-md-12 col-lg-12">
+        {% for task in tasks %}
+            <article class="post vt-post">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                        <div class="post-type post-img">
+                            <a href="{% url 'task_detail' task.pk %}">
+                                <img class="post_image" src="{{ task.image.url }}">
+                            </a>
+                        </div>
+
+                        <div class="author-info author-info-2">
+                            <ul class="list-inline">
+                                <li>
+                                    <div class="info">
+                                        <p>Запостили: </p>
+                                        <p>{{ task.created }}</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="info" style="margin-left: 1rem">
+                                        <p>Дедлайн: </p>
+                                        <p>{{ task.deadline }}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                        <div class="caption" style="max-width:500px!important; word-wrap:break-word;">
+                            <h3 class="md-heading"><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></h3>
+                                <p>{{ task.description }}</p>
+                            <a class="btn btn-default" href="{% url 'task_detail' task.pk %}" role="button">Читать подробнее...</a>
+                        </div>
+                        <div class="tags" style="margin-top:5rem">
+                            <p>
+                                Тэги:
+                                {% for tag in task.tags.all %}
+                                <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</div>

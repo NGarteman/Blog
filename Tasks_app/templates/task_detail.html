@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Task Post
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a class="gradient-button" href="{% url 'task_list' %}"  style="color: blue">
+        <span class="material-icons">arrow_back</span></a>
+    <h1 style="text-align: center;">{{ task.title }}
+        {% if request.user == task.author %}
+            <a class="gradient-button" href="{% url 'task_edit' task.pk%}"  style="font-size: 10px">
+            <span class="material-icons">edit</span></a>
+
+            <a class="gradient-button" href="{% url 'task_delete' task.pk%}"  style="font-size: 10px"
+            onclick="return confirm('Вы уверены, что хотите удалить этот пост?')">
+            <span class="material-icons">delete</span></a>
+        {% endif %}
+    </h1>
+    </br>
+    <div class="row" style="margin: 1rem">
+        <div class="col">
+        <img class="post_image" src="{{ task.image.url }}" alt="no image" style="width: 500px">
+        </div>
+        <div class="col">
+            <h5 style="max-width:500px!important; word-wrap:break-word; text-align: center">{{ task.description }}</h5>
+            </br></br>
+            <p>Создан: {{ task.created }}</p>
+            <p>Дедлайн до: {{ task.deadline }}</p>
+            <p>
+                Тэги:
+                {% for tag in task.tags.all %}
+                <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+                {% endfor %}
+            </p>
+            <p>Автор: {{ task.author }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

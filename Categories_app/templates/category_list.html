@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All Posts
+{% endblock %}
+
+{% block content %}
+<div class="center container" style="width: 500px">
+    <h1>Все категории</h1>
+    <ul>
+{% for cat in categories %}
+        <li>
+    <a title="ПЕРЕЙТИ В КАТЕГОРИЮ"
+        style="font-size:25px; text-decoration: none; color: black" class="nav-link"
+        href="{% url 'category_detail' cat.pk %}">{{ cat.name }}
+    </a></li>
+{% endfor %}
+    </ul>
+</div>
+{% endblock %}

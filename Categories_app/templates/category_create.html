@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Category create{% endblock %}
+
+{% block content %}
+    <div style="max-width: 400px; margin: 2rem auto">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">
+                Create
+            </button>
+        </form>
+    </div>
+{% endblock %}

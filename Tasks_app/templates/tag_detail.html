@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <a class="gradient-button" href="{% url 'task_list' %}"  style="color: blue">
+    <span class="material-icons">arrow_back</span></a>
+
+    <div class="col"><h3 class="mg-5">Посты с тэгом: {{ tag.title|title }}⠀
+    {% if request.user == tag.author %}
+        <a class="gradient-button" href="{% url 'tag_edit' tag.pk%}"  style="font-size: 10px">
+        <span class="material-icons">edit</span></a>
+
+        <a class="gradient-button" href="{% url 'tag_delete' tag.pk%}"  style="font-size: 10px"
+        onclick="return confirm('Вы уверены, что хотите удалить этот тэг?')">
+        <span class="material-icons">delete</span></a>
+    {% endif %}
+    </h3></div>
+</div>
+    {% include 'task_card.html' %}
+{% endblock %}

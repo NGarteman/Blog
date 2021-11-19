@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}ALl Tags{% endblock %}
+
+{% block content %}
+<div class="center container" style="width: 500px">
+    <h1>Все Тэги</h1>
+    <ul>
+        {% for tag in tags %}
+        <li>
+            <a href="{% url 'tag_detail_url' tag.pk%}" title="ПЕРЕЙТИ В ТЭГ"
+            style="font-size:25px; text-decoration: none; color: black" class="nav-link">
+            <h3>{{ tag.title }}</h3>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
