@@ -1,0 +1,17 @@
+### PyCharm ###
+
+.idea/*
+
+# JetBrains templates
+**___jb_tmp___
+
+# Others
+*.db
+config.py
+!ci/deploy/*/config.py
+config.json
+app.log
+log/
+
+attachments
+venv/
