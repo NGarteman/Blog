@@ -37,6 +37,43 @@
             <p>Автор: {{ task.author }}</p>
         </div>
     </div>
+
+    <div class="container" style="width: 600px; margin-top: 2rem; justify-content: center">
+        {% if request.user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class='mb-2' for="exampleFormControlTextarea1">Оставить комментарий: </label>
+                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"
+                name="content" required id="id_content"></textarea>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
+        </form>
+        {% else %}
+            <p>Для того чтобы оставить коментарий, <a href="{% url 'login' %}">войдите в аккаунт!</a></p>
+        {% endif %}
+
+
+        {% if comments %}
+            {% for comment in comments %}
+                <div style="margin-top:1rem; padding: 1rem; border: 1px solid black;">
+                {% if request.user == comment.author %}
+                      <a href="{% url 'comment_edit' task.pk comment.pk%}" style="color: gray">
+                          <span class="material-icons">edit</span></a>
+                      <a href="{% url 'comment_delete' task.pk comment.pk%}" style="color: gray"
+                      onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">
+                          <span class="material-icons">delete</span></a>
+                {% endif %}
+                    <p>Автор: {{ comment.author }}</p>
+                    <p>Текст: {{ comment.content }}</p>
+                    <p>Дата: {{ comment.created }}</p>
+                </div>
+            {% endfor%}
+        {% else %}
+            <p class="mt-4">Коментариев еще нет</p>
+        {% endif %}
+    </div>
+</br>
 </div>
 {% endblock %}
 

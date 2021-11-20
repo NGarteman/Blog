@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task, Tag
+from .models import Task, Tag, Comment
 from Categories_app.models import Category
 
 
@@ -25,3 +25,15 @@ class TagEditForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = ('title',)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+
+class CommentEditForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
